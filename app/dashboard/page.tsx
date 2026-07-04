@@ -205,53 +205,53 @@ export default function Home() {
           </div>
         </div>
         
-        <nav className="px-4 pb-3 md:pb-0 md:px-4 md:flex-1 flex md:flex-col gap-2 md:space-y-2 mt-0 md:mt-2 overflow-x-auto no-scrollbar shrink-0">
+        <nav className="px-2 pb-3 md:pb-0 md:px-4 md:flex-1 flex justify-between md:flex-col gap-1 md:space-y-2 mt-0 md:mt-2 shrink-0">
           <button 
             onClick={() => handleTabChange('agent')} 
-            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
               activeTab === 'agent' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <Bot className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="font-medium text-xs md:text-sm">Agent Workflow</span>
+            <Bot className="w-5 h-5 md:w-5 md:h-5" />
+            <span className="font-medium text-[10px] md:text-sm">Workflow</span>
           </button>
           
           <button 
             onClick={() => handleTabChange('pipeline')} 
-            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
               activeTab === 'pipeline' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <KanbanSquare className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="font-medium text-xs md:text-sm">Pipeline Dashboard</span>
+            <KanbanSquare className="w-5 h-5 md:w-5 md:h-5" />
+            <span className="font-medium text-[10px] md:text-sm">Pipeline</span>
           </button>
 
           <button 
             onClick={() => handleTabChange('prescreen')} 
-            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
               activeTab === 'prescreen' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <ClipboardList className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="font-medium text-xs md:text-sm">Pre-Screen Forms</span>
+            <ClipboardList className="w-5 h-5 md:w-5 md:h-5" />
+            <span className="font-medium text-[10px] md:text-sm">Forms</span>
           </button>
 
           <button 
             onClick={() => handleTabChange('analytics')} 
-            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
               activeTab === 'analytics' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <BarChart3 className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="font-medium text-xs md:text-sm">Hiring Analytics</span>
+            <BarChart3 className="w-5 h-5 md:w-5 md:h-5" />
+            <span className="font-medium text-[10px] md:text-sm">Analytics</span>
           </button>
         </nav>
         
