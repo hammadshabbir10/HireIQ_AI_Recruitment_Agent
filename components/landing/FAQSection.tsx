@@ -33,7 +33,7 @@ export default function FAQSection() {
           <h3 className="text-3xl font-bold text-slate-900">Frequently Asked Questions</h3>
         </div>
 
-        <Accordion type="single" collapsible="true" className="w-full">
+        <Accordion className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`} className="border-b-slate-200">
               <AccordionTrigger className="text-left text-lg font-medium text-slate-800 hover:text-indigo-600 hover:no-underline py-6">
