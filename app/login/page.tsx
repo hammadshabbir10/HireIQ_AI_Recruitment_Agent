@@ -43,13 +43,20 @@ export default function LoginPage() {
         if (error) throw error;
         router.push('/');
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: { data: { full_name: name } },
         });
         if (error) throw error;
-        router.push('/');
+        
+        // Supabase might require email confirmation
+        if (data.user && !data.session) {
+          setError('Success! Please check your email inbox to confirm your account before logging in.');
+          setIsLogin(true); // Switch to login view
+        } else {
+          router.push('/');
+        }
       }
     } catch (err: any) {
       setError(err.message || 'Authentication failed');
@@ -130,16 +137,16 @@ export default function LoginPage() {
           <span className="text-2xl font-bold text-slate-900 tracking-tight">Hire<span className="text-indigo-600">IQ</span></span>
         </div>
 
-        <div className="w-full max-w-[460px]">
+        <div className="w-full max-w-[520px]">
           <div className="mb-10">
-            <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-5xl font-extrabold text-slate-900 tracking-tight mb-2">
               {isLogin ? 'Welcome back' : 'Create account'}
             </h2>
             <p className="mt-3 text-base text-slate-500">
               {isLogin ? "Don't have an account? " : 'Already have an account? '}
               <button
                 onClick={() => { setIsLogin(!isLogin); setError(''); }}
-                className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors"
+                className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors cursor-pointer"
               >
                 {isLogin ? 'Sign up free' : 'Sign in'}
               </button>
@@ -149,15 +156,15 @@ export default function LoginPage() {
           <form className="space-y-6" onSubmit={handleAuth}>
             {!isLogin && (
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Full Name</label>
+                <label className="block text-base font-semibold text-slate-700 mb-2">Full Name</label>
                 <div className="relative">
-                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" style={{ width: 17, height: 17 }} />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full h-14 pl-11 pr-4 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50"
+                    className="w-full h-16 pl-12 pr-4 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50"
                     placeholder="John Doe"
                   />
                 </div>
@@ -165,30 +172,30 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1.5">Email Address</label>
+              <label className="block text-base font-semibold text-slate-700 mb-2">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" style={{ width: 17, height: 17 }} />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-14 pl-11 pr-4 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50"
+                  className="w-full h-16 pl-12 pr-4 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50"
                   placeholder="you@company.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1.5">Password</label>
+              <label className="block text-base font-semibold text-slate-700 mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" style={{ width: 17, height: 17 }} />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-14 pl-11 pr-4 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50"
+                  className="w-full h-16 pl-12 pr-4 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50"
                   placeholder="Min. 8 characters"
                 />
               </div>
@@ -200,11 +207,11 @@ export default function LoginPage() {
               </div>
             )}
 
-            <div className="pt-1">
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 flex items-center justify-center gap-2 rounded-xl font-semibold text-base text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-indigo-600/25 mt-2"
+                className="w-full h-16 flex items-center justify-center gap-2 rounded-xl font-bold text-lg text-white bg-indigo-600 hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl shadow-indigo-600/30 mt-2"
               >
                 {isLoading ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Processing...</>

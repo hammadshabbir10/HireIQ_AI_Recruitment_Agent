@@ -1,15 +1,31 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Bot, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowRight, Bot, CheckCircle2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
+  // I animate both columns on mount so they slide in from opposite sides
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 80);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column - Text */}
-          <div className="max-w-xl">
+          {/* Left Column — slides in from the left */}
+          <div
+            className="max-w-xl transition-all duration-[900ms] ease-out"
+            style={{
+              opacity: mounted ? 1 : 0,
+              transform: mounted ? 'translateX(0)' : 'translateX(-60px)',
+            }}
+          >
             <div className="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-6">
               For Talent Acquisition Teams
             </div>
@@ -25,7 +41,7 @@ export default function HeroSection() {
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <Link href="/dashboard">
-                <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-8 py-7 h-14 text-lg font-medium shadow-lg shadow-indigo-600/30 group">
+                <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-8 py-7 h-14 text-lg font-medium shadow-lg shadow-indigo-600/30 group cursor-pointer">
                   Open Dashboard
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -33,8 +49,14 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column - Visual */}
-          <div className="relative mx-auto w-full max-w-lg lg:max-w-none group cursor-default perspective-1000 mt-10 lg:mt-0">
+          {/* Right Column — slides in from the right */}
+          <div
+            className="relative mx-auto w-full max-w-lg lg:max-w-none group cursor-default mt-10 lg:mt-0 transition-all duration-[900ms] ease-out"
+            style={{
+              opacity: mounted ? 1 : 0,
+              transform: mounted ? 'translateX(0)' : 'translateX(60px)',
+            }}
+          >
             {/* Soft background blob */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-50/50 rounded-full blur-3xl -z-10 group-hover:bg-indigo-100/50 transition-colors duration-700"></div>
             
@@ -72,7 +94,7 @@ export default function HeroSection() {
                 <div className="bg-indigo-50/50 rounded-xl p-4 border border-indigo-100/50 relative overflow-hidden">
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-indigo-500 rounded-l-xl"></div>
                   <p className="text-sm text-slate-600 leading-relaxed italic pl-2">
-                    "Candidate is a strong match for the role. They completed the automated pre-screen questionnaire with a score of <strong>84/100</strong>, demonstrating excellent problem-solving capabilities and system design knowledge."
+                    &ldquo;Candidate is a strong match for the role. They completed the automated pre-screen questionnaire with a score of <strong>84/100</strong>, demonstrating excellent problem-solving capabilities and system design knowledge.&rdquo;
                   </p>
                 </div>
               </div>

@@ -38,13 +38,13 @@ export default function Navbar() {
       <div className="w-full mx-auto px-6 sm:px-8 xl:px-16">
         <div className="flex justify-between items-center h-20">
           {/* Left: Logo */}
-          <div className="flex-1 flex items-center gap-4">
+          <div className="flex-1 flex items-center gap-3">
             <img
-              src="/zikra_infotech_logo.png"
-              alt="Zikra Info Tech Logo"
-              className="h-10 w-auto object-contain"
+              src="/hireiq_logo.png"
+              alt="HireIQ Logo"
+              className="h-14 w-14 object-contain rounded-xl shadow-lg shadow-indigo-500/20"
             />
-            <span className="text-white font-bold text-2xl tracking-tight border-l border-slate-700 pl-4">
+            <span className="text-white font-bold text-2xl tracking-tight">
               Hire<span className="text-indigo-400">IQ</span>
             </span>
           </div>
