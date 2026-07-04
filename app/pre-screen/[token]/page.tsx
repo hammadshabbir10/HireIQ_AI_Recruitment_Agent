@@ -112,12 +112,6 @@ export default function PreScreenForm({ params }: { params: Promise<{ token: str
             Thank you, <strong>{questionnaire?.candidates?.name}</strong>! Your answers have been received
             and will be reviewed by the recruitment team.
           </p>
-          {score !== null && (
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 mb-6">
-              <p className="text-sm text-indigo-600 font-medium mb-1">Your Pre-Screen Score</p>
-              <p className="text-4xl font-bold text-indigo-700">{score}<span className="text-lg text-indigo-400">/100</span></p>
-            </div>
-          )}
           <p className="text-xs text-slate-400">You'll hear back from the recruiter shortly. Good luck!</p>
         </div>
       </div>
