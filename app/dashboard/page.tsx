@@ -177,83 +177,86 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 font-sans overflow-hidden">
+    <div className="flex flex-col md:flex-row h-screen h-[100dvh] bg-slate-50 font-sans overflow-hidden">
       
-      {/* SIDEBAR */}
-      <aside className="w-64 bg-[#111827] flex flex-col shrink-0 border-r border-slate-800 z-10 transition-all duration-300">
-        <div className="p-6">
-          <div className="flex items-center gap-3 mb-4">
+      {/* SIDEBAR / TOP NAV ON MOBILE */}
+      <aside className="w-full md:w-64 h-auto md:h-full bg-[#111827] flex flex-col shrink-0 border-b md:border-r border-slate-800 z-20 transition-all duration-300">
+        <div className="p-4 md:p-6 flex justify-between items-center md:items-start md:flex-col">
+          <div className="flex items-center gap-3 md:mb-4">
             <Link href="/">
               <img
-                src="/zikra_infotech_logo.png"
-                alt="Zikra Info Tech Logo"
-                className="h-10 w-auto object-contain hover:opacity-80 transition-opacity cursor-pointer"
+                src="/hireiq_logo.png"
+                alt="HireIQ Logo"
+                className="h-8 md:h-10 w-auto object-contain hover:opacity-80 transition-opacity cursor-pointer rounded-lg"
               />
             </Link>
+            <div className="hidden md:block">
+              <h1 className="font-bold text-2xl leading-none text-white tracking-tight">HireIQ</h1>
+              <p className="text-xs uppercase font-semibold text-indigo-400 tracking-wider mt-1.5">Agent Dashboard</p>
+            </div>
+            <div className="md:hidden block">
+               <h1 className="font-bold text-xl leading-none text-white tracking-tight">HireIQ</h1>
+            </div>
           </div>
-          <div>
-            <h1 className="font-bold text-2xl leading-none text-white tracking-tight">HireIQ</h1>
-            <p className="text-xs uppercase font-semibold text-indigo-400 tracking-wider mt-1.5">Agent Dashboard</p>
-          </div>
-          <div className="mt-5">
-            <Link href="/" className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white transition-colors">
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Landing Page
+          <div className="mt-0 md:mt-5">
+            <Link href="/" className="inline-flex items-center gap-2 text-[10px] md:text-xs font-medium text-slate-400 hover:text-white transition-colors bg-slate-800/50 md:bg-transparent px-3 py-1.5 md:px-0 md:py-0 rounded-lg">
+              <ArrowLeft className="w-3.5 h-3.5" /> <span className="hidden md:inline">Back to Landing Page</span><span className="inline md:hidden">Back</span>
             </Link>
           </div>
         </div>
         
-        <nav className="flex-1 px-4 space-y-2 mt-2">
+        <nav className="px-4 pb-3 md:pb-0 md:px-4 md:flex-1 flex md:flex-col gap-2 md:space-y-2 mt-0 md:mt-2 overflow-x-auto no-scrollbar shrink-0">
           <button 
             onClick={() => handleTabChange('agent')} 
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
               activeTab === 'agent' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
             }`}
           >
-            <Bot className="w-5 h-5" />
-            <span className="font-medium text-sm">Agent Workflow</span>
+            <Bot className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-medium text-xs md:text-sm">Agent Workflow</span>
           </button>
           
           <button 
             onClick={() => handleTabChange('pipeline')} 
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
               activeTab === 'pipeline' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
             }`}
           >
-            <KanbanSquare className="w-5 h-5" />
-            <span className="font-medium text-sm">Pipeline Dashboard</span>
+            <KanbanSquare className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-medium text-xs md:text-sm">Pipeline Dashboard</span>
           </button>
 
           <button 
             onClick={() => handleTabChange('prescreen')} 
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
               activeTab === 'prescreen' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
             }`}
           >
-            <ClipboardList className="w-5 h-5" />
-            <span className="font-medium text-sm">Pre-Screen Forms</span>
+            <ClipboardList className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-medium text-xs md:text-sm">Pre-Screen Forms</span>
           </button>
 
           <button 
             onClick={() => handleTabChange('analytics')} 
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+            className={`whitespace-nowrap flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-xl transition-all ${
               activeTab === 'analytics' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
-              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
+              : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-slate-800/20 md:bg-transparent'
             }`}
           >
-            <BarChart3 className="w-5 h-5" />
-            <span className="font-medium text-sm">Hiring Analytics</span>
+            <BarChart3 className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-medium text-xs md:text-sm">Hiring Analytics</span>
           </button>
         </nav>
         
         {user && (
-          <div className="p-4 border-t border-slate-800/60 bg-slate-900/30">
+          <div className="hidden md:block p-4 border-t border-slate-800/60 bg-slate-900/30">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0 shadow-inner">
                 <UserIcon className="w-5 h-5 text-slate-300" />
@@ -277,8 +280,8 @@ export default function Home() {
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-50/50">
-        <div className="flex-1 p-4 md:p-6 lg:max-w-[1400px] lg:mx-auto w-full flex flex-col overflow-hidden min-h-0 relative">
+      <main className="flex-1 flex flex-col min-w-0 overflow-y-auto md:overflow-hidden bg-slate-50/50">
+        <div className="flex-1 p-3 md:p-6 lg:max-w-[1400px] lg:mx-auto w-full flex flex-col min-h-0 relative">
           
           {/* Loading Overlay */}
           {isTabLoading && (
