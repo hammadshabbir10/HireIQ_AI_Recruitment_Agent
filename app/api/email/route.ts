@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase/server';
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,6 +10,11 @@ export async function POST(request: NextRequest) {
     if (!to || !subject || !text) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
+
+    // Get the logged in recruiter's email
+    const supabaseServer = await createClient();
+    const { data: { user } } = await supabaseServer.auth.getUser();
+    const recruiterEmail = user?.email || process.env.EMAIL_USER;
 
     // Create a nodemailer transporter
     const transporter = nodemailer.createTransport({
@@ -24,6 +30,7 @@ export async function POST(request: NextRequest) {
     // Send the email
     const info = await transporter.sendMail({
       from: `"HireIQ Agent" <${process.env.EMAIL_USER}>`,
+      replyTo: recruiterEmail,
       to,
       subject,
       text,

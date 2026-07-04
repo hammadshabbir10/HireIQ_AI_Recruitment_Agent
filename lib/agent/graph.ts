@@ -2,7 +2,7 @@ import { ChatGroq } from '@langchain/groq';
 import { HumanMessage, AIMessage, BaseMessage } from '@langchain/core/messages';
 import { supabase } from '../supabase';
 
-// Use the fast 8b model for analysis — much lower token usage
+// I used the fast 8b model for analysis because it has much lower token usage
 const analysisLLM = new ChatGroq({
   model: 'llama-3.1-8b-instant',
   apiKey: process.env.GROQ_API_KEY,
@@ -12,7 +12,7 @@ const analysisLLM = new ChatGroq({
 // Sleep helper
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-// Retry wrapper — handles 429 with exponential backoff
+// I built a retry wrapper that handles 429 errors with exponential backoff
 async function withRetry<T>(fn: () => Promise<T>, maxRetries = 3, baseDelay = 15000): Promise<T> {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
@@ -31,7 +31,7 @@ async function withRetry<T>(fn: () => Promise<T>, maxRetries = 3, baseDelay = 15
   throw new Error('Max retries exceeded');
 }
 
-// Robust JSON extractor — handles LLM quirks like control chars, extra text, etc.
+// I created a robust JSON extractor that handles LLM quirks like control chars and extra text
 function extractJSON(raw: string): any {
   // 1. Strip markdown code fences
   let text = raw
@@ -71,7 +71,7 @@ function extractJSON(raw: string): any {
   }
 }
 
-// Call LLM and parse JSON from response — retries on non-JSON responses
+// I call the LLM and parse JSON from the response. I added retries on non JSON responses
 async function callLLMForJSON(prompt: string, retries = 3): Promise<any> {
   for (let attempt = 0; attempt < retries; attempt++) {
     try {
@@ -94,12 +94,12 @@ async function callLLMForJSON(prompt: string, retries = 3): Promise<any> {
   throw new Error('LLM failed to return valid JSON after multiple attempts');
 }
 
-// ─── STEP 1: Parse CV and Score ───────────────────────────────────────────────
+// STEP 1: I parse the CV and Score the candidate
 async function stepParseAndScore(cvText: string, jobDescription: string, jobTitle: string) {
   const cv = cvText.slice(0, 2800);
   const jd = jobDescription.slice(0, 1500);
 
-  // PHASE 1: AI just extracts skills — simple focused task, less hallucination
+  // PHASE 1: I instructed the AI to just extract skills to keep it focused and reduce hallucination
   const extractPrompt = `You are a CV parser. ⚠️ INSTRUCTIONS:
 - Read the JD and extract the core requirements into jd_must_haves and jd_nice_to_haves.
 - Read the CV and intelligently match the candidate's skills against the JD requirements.
@@ -118,18 +118,18 @@ Reply ONLY with valid single-line JSON:
 
   const extracted = await callLLMForJSON(extractPrompt);
 
-  // PHASE 2: AI did semantic matching, now calculate scores
+  // PHASE 2: I use the AI semantic matching to calculate the final scores
   const mustHaves: string[] = extracted.jd_must_haves || [];
   const niceToHaves: string[] = extracted.jd_nice_to_haves || [];
   
   const mustHaveMatches: string[] = extracted.matched_must_haves || [];
   const niceToHaveMatches: string[] = extracted.matched_nice_to_haves || [];
 
-  // Category scores — pure math
+  // I calculate category scores using pure math
   const scoreA = mustHaves.length > 0 ? Math.round(40 * (mustHaveMatches.length / mustHaves.length)) : 0;
   const scoreB = niceToHaves.length > 0 ? Math.round(30 * (niceToHaveMatches.length / niceToHaves.length)) : 0;
 
-  // Domain relevance — AI gave a note, we score it based on keyword sentiment
+  // I score the domain relevance based on the AI keyword sentiment
   const domainNote = (extracted.domain_relevance_note || '').toLowerCase();
   const scoreC = domainNote.includes('directly') || domainNote.includes('strong') ? 15
     : domainNote.includes('relevant') || domainNote.includes('related') ? 10
@@ -166,7 +166,7 @@ Reply ONLY with valid single-line JSON:
   };
 }
 
-// ─── STEP 2: Draft Outreach Email ─────────────────────────────────────────────
+// STEP 2: I draft the Outreach Email
 async function stepDraftEmail(name: string, email: string, jobTitle: string, score: number, strengths: string, summary: string, recruiterName: string, status: string, formUrl?: string) {
   const isRejected = status === 'rejected';
   
@@ -190,7 +190,7 @@ Reply ONLY with valid single-line JSON:
   return callLLMForJSON(prompt);
 }
 
-// ─── STEP 3: Save to Supabase ─────────────────────────────────────────────────
+// STEP 3: I save the parsed data to Supabase
 async function stepSavePipeline(data: {
   name: string; email: string; rawCv: string;
   summary: string; score: number; reasoning: string;
