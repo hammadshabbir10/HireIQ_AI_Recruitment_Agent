@@ -2,6 +2,10 @@
 
 An advanced, AI powered recruitment platform and applicant tracking system built to automate candidate screening, personalized outreach, and technical pre screening.
 
+## Live Demo
+
+* **Deployed Application:** [https://hire-iq-ai-recruitment-agent.vercel.app/](https://hire-iq-ai-recruitment-agent.vercel.app/)
+
 ## Overview
 
 HireIQ acts as an autonomous recruitment assistant. Instead of recruiters manually reviewing resumes and sending generic emails, the agent processes applicant data, evaluates their fit using semantic matching, drafts personalized communication, and generates custom technical questionnaires for shortlisted candidates. All operations are managed through a centralized dashboard.
@@ -35,6 +39,9 @@ HireIQ acts as an autonomous recruitment assistant. Instead of recruiters manual
 
 ### Environment Variables Required
 
+Create a \`.env.local\` file in the root directory and add the following variables:
+
+```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 GROQ_API_KEY=your_groq_api_key
@@ -43,6 +50,7 @@ EMAIL_PORT=your_smtp_port
 EMAIL_USER=your_email_address
 EMAIL_PASS=your_email_password
 NEXT_PUBLIC_BASE_URL=your_production_url
+```
 
 5. Run the development server using npm run dev.
 6. Access the application at localhost:3000.
