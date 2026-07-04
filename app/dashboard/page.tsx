@@ -205,53 +205,53 @@ export default function Home() {
           </div>
         </div>
         
-        <nav className="px-2 pb-3 md:pb-0 md:px-4 md:flex-1 flex justify-between md:flex-col gap-1 md:space-y-2 mt-0 md:mt-2 shrink-0">
+        <nav className="px-2 pb-3 md:pb-0 md:px-4 md:flex-1 flex justify-between md:justify-start md:flex-col gap-1 md:space-y-2 mt-0 md:mt-2 shrink-0">
           <button 
             onClick={() => handleTabChange('agent')} 
-            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none md:w-full ${
               activeTab === 'agent' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
               : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <Bot className="w-5 h-5 md:w-5 md:h-5" />
-            <span className="font-medium text-[10px] md:text-sm">Workflow</span>
+            <Bot className="w-5 h-5 md:w-5 md:h-5 shrink-0" />
+            <span className="font-medium text-[10px] md:text-sm truncate"><span className="md:hidden">Workflow</span><span className="hidden md:inline">Agent Workflow</span></span>
           </button>
           
           <button 
             onClick={() => handleTabChange('pipeline')} 
-            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none md:w-full ${
               activeTab === 'pipeline' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
               : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <KanbanSquare className="w-5 h-5 md:w-5 md:h-5" />
-            <span className="font-medium text-[10px] md:text-sm">Pipeline</span>
+            <KanbanSquare className="w-5 h-5 md:w-5 md:h-5 shrink-0" />
+            <span className="font-medium text-[10px] md:text-sm truncate"><span className="md:hidden">Pipeline</span><span className="hidden md:inline">Pipeline Dashboard</span></span>
           </button>
 
           <button 
             onClick={() => handleTabChange('prescreen')} 
-            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none md:w-full ${
               activeTab === 'prescreen' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
               : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <ClipboardList className="w-5 h-5 md:w-5 md:h-5" />
-            <span className="font-medium text-[10px] md:text-sm">Forms</span>
+            <ClipboardList className="w-5 h-5 md:w-5 md:h-5 shrink-0" />
+            <span className="font-medium text-[10px] md:text-sm truncate"><span className="md:hidden">Forms</span><span className="hidden md:inline">Pre-Screen Forms</span></span>
           </button>
 
           <button 
             onClick={() => handleTabChange('analytics')} 
-            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none ${
+            className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-3 p-2 md:px-4 md:py-3 rounded-xl transition-all flex-1 md:flex-none md:w-full ${
               activeTab === 'analytics' 
               ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/20' 
               : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 bg-transparent'
             }`}
           >
-            <BarChart3 className="w-5 h-5 md:w-5 md:h-5" />
-            <span className="font-medium text-[10px] md:text-sm">Analytics</span>
+            <BarChart3 className="w-5 h-5 md:w-5 md:h-5 shrink-0" />
+            <span className="font-medium text-[10px] md:text-sm truncate"><span className="md:hidden">Analytics</span><span className="hidden md:inline">Hiring Analytics</span></span>
           </button>
         </nav>
         
