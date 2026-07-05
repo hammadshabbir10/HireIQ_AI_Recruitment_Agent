@@ -5,6 +5,7 @@ An advanced, AI powered recruitment platform and applicant tracking system built
 ## Live Demo
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://hire-iq-ai-recruitment-agent.vercel.app/)
+[![Project Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)](#)
 
 ## Overview
 
